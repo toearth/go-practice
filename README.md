@@ -26,7 +26,7 @@ var x struct {
 参考：Golang学习随笔
 
 #### 3.slice与map为引用类型, array, struct为值类型
-参考：Golang学习随笔
+[参考：Golang学习随笔](https://pan.baidu.com/s/1hWP4usdm0PoWWt0UVyB8ww?errno=0&errmsg=Auth%20Login%20Sucess&&bduss=&ssnerror=0&traceid=)
 
 #### 4.初始化map，逗号要记牢  
 ```go
@@ -64,3 +64,18 @@ type loginProfile struct {
 	Type string  `json:"type"`
 }
 ```
+参考：Golang学习随笔
+
+#### 7. 分别通过interface和struct调用方法的不同
+用struct实现某个接口的方法集时，可以将receiver定义为值类型，也可以定义为指针类型，当通过struct实例调用方法时，可以用其值也可以用其指针，不管此方法的receiver是值类型，还是指针类型， go语言会帮我们自动转化！但是如果你是通过接口来调用具体类型实现的方法时， go语言不会再帮你把“值”和"指针"做自动转化，以适应相应的receiver类型。所以我们在实现接口的方法集时，receiver是一律定义为指针类型，或是值类型，抑或两者兼而有之，此需要我们设计时考虑清楚！当然我们也可以走另一条路，就是调用时一律以“具体类型实例的指针”来赋值给接口！
+
+参考：Golang学习随笔
+
+#### 8.switch
+每个case会自动退出，接着向下走需要添加fallthrough，与c相反
+
+#### 9.for循环迭代变量
+
+for语句中的迭代变量在每次迭代时被重新使用，在for循环中创建的闭包将会引用同一个迭代变量v。
+
+参考：Golang学习随笔
