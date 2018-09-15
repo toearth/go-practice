@@ -135,3 +135,8 @@ BenchmarkStrCatWithOperator-8　　100000　175080 ns/op
  所以在一些性能要求较高的场合，尽量使用 buffer.Buffer以获得更好的性能。性能要求不太高的场合，直接使用运算符，代码更简短清晰，能获得比较好的可读性，如果需要拼接的不仅仅是字符串，还有数字之类的其他需求的话，可以考虑 fmt.Sprintf。
  
 参考：[Go在迅雷P2P连通系统中的性能优化实践－朱文](https://mp.weixin.qq.com/s/UiFHE6dcl9dPlhlj-78UcQ)
+
+#### 17 fmt.Sprintf
+fmt.Sprintf()用到反射，性能还是有很大损失的
+
+参考：[Go在迅雷P2P连通系统中的性能优化实践－朱文](https://mp.weixin.qq.com/s/UiFHE6dcl9dPlhlj-78UcQ)
