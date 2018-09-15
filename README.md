@@ -118,3 +118,20 @@ golang用error应对可以预见可能出现的错误与异常，用panic应对�
 我们在做项目时，要尽可能降低GC的负担， (1)控制对象数量，越少越好； (2)避免频繁申请和释放对象；(3)简化对象引用关系，不是说所有情况下都用指针，大家指来指去，就像蜘蛛网，有时也需要复制来避免过度引用。所以对象复用是个好办法，如：对象池；github上有好多，自己也可以写一个！
 
 参考：Golang学习随笔
+
+#### 16 字符串拼接
+
+常见的拼接方式有4种
+bytes.Buffer 可以预设容量
+strings.Join   需要构建slice
+fmt.Sprintf   反射
+operator+     多次对象的分配与值拷贝
+BenchmarkStrCatWithBuffer-8　　20000000　　80.3 ns/op
+BenchmarkStrCatWithJoin-8　　　　 30000　　119035 ns/op
+BenchmarkStrCatWithSprintf-8　　　50000　　141812 ns/op
+BenchmarkStrCatWithOperator-8　　100000　175080 ns/op
+
+　　bytes.buffer可以预设容量，所以性能最好。 strings.jon有一个问题，你需要构建slice，构建slice也是需要成本的。fmt.Spsintf会用到反射，大家知道反射的性能不好。还有operator+，我们平常用得比较多，它涉及多次对象的分配与拷贝值。压测的结果差距还是挺大的。
+ 所以在一些性能要求较高的场合，尽量使用 buffer.Buffer以获得更好的性能。性能要求不太高的场合，直接使用运算符，代码更简短清晰，能获得比较好的可读性，如果需要拼接的不仅仅是字符串，还有数字之类的其他需求的话，可以考虑 fmt.Sprintf。
+ 
+参考：[Go在迅雷P2P连通系统中的性能优化实践－朱文](https://mp.weixin.qq.com/s/UiFHE6dcl9dPlhlj-78UcQ)
